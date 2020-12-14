@@ -20,14 +20,13 @@ PATH="$PATH:$PWD/gh_1.3.1_linux_arm64/bin"
 git config --local user.name MateuszMalisz
 git config --local user.email mamalisz@microsoft.com
 git config --local credential.helper "store --file $2"
+git config --local credential.username "MateuszMalisz"
 
 branchName=tempBranchToPush
 git checkout -b $branchName
 git add count
 git commit -m "Updating count to $runCount"
-git push origin $branchName:first <<EOF
-MateuszMalisz
-EOF
+git push origin $branchName:first
 
 gh config set prompt disabled
 gh auth login --with-token < $1
