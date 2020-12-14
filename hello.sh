@@ -23,6 +23,7 @@ git config --local credential.helper "store --file $2"
 
 git add count
 git commit -m "Updating count to $runCount"
+git remote add origin https://github.com/MateuszMalisz/playground.git
 git push origin first
 
 gh config set prompt disabled
