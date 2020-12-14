@@ -1,7 +1,11 @@
 #!/bin/bash -ex
 
 # $1 is gh token
-# $2 is git token
+# $2 is ssh path
+
+#Secure keys
+chmod 600 $1
+chmod 600 $2
 
 countFile="count"
 # Get count from file
@@ -20,15 +24,24 @@ PATH="$PATH:$PWD/gh_1.3.1_linux_arm64/bin"
 # Masquerade as Mateusz
 git config --local user.name MateuszMalisz
 git config --local user.email mamalisz@microsoft.com
-git config --local credential.helper "store --file $2"
-git config --local credential.username "MateuszMalisz"
+
+# Make sure it exists
+mkdir -p ~/.ssh/
+touch ~/.ssh/config
+# Add Mateusz's credentials
+cat >> ~/.ssh/config <<EOF
+Host github.com
+	IdentityFile $2
+EOF
+
+git remote add origin-ssh git@github.com:MateuszMalisz/playground.git
 
 # Create PR branch from first
 branchName="trainBranch$runCount"
 git checkout -b $branchName
 git add count
 git commit -m "Updating count to $runCount"
-git push origin $branchName
+git push origin-ssh $branchName
 
 # Create PR
 gh config set prompt disabled

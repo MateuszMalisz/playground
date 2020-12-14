@@ -16,7 +16,7 @@ steps:
   - task: DownloadSecureFile@1
     name: gitToken
     inputs:
-      secureFile: 'mamalisz-git-credential'
+      secureFile: 'mamalisz_ssh_gh'
     displayName: "Get git token"
 
   - script: ./hello.sh $(ghToken.secureFilePath) $(gitToken.secureFilePath)
