@@ -21,9 +21,9 @@ git config --local user.name MateuszMalisz
 git config --local user.email mamalisz@microsoft.com
 git config --local credential.helper "store --file $2"
 
+git checkout -b tempBranchToPush
 git add count
 git commit -m "Updating count to $runCount"
-git remote add origin https://github.com/MateuszMalisz/playground.git
 git push origin first
 
 gh config set prompt disabled
