@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 # $1 is gh token
 # $2 is git token
@@ -12,7 +12,7 @@ echo "Hello! You are running this $runCount. time!"
 runCount=$((runCount+1))
 echo "$runCount" > "$countFile"
 
-https://github.com/cli/cli/releases/download/v1.3.1/gh_1.3.1_linux_arm64.tar.gz
+wget https://github.com/cli/cli/releases/download/v1.3.1/gh_1.3.1_linux_arm64.tar.gz
 tar xf gh*
 PATH="$PATH:$PWD/gh_1.3.1_linux_arm64/bin"
 
