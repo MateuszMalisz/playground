@@ -10,5 +10,17 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: ./hello.sh
-  displayName: 'Run a one-line script'
+  - task: DownloadSecureFile@1
+    name: ghToken
+    inputs:
+      secureFile: 'mamalisz-gh-token'
+    displayName: "Get gh token"
+
+  - task: DownloadSecureFile@1
+    name: gitToken
+    inputs:
+      secureFile: 'mamalisz-git-credential'
+    displayName: "Get git token"
+
+  - script: ./hello.sh $(ghToken.secureFilePath) $(gitToken.secureFilePath)
+    displayName: 'Run a one-line script'
