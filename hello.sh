@@ -21,10 +21,11 @@ git config --local user.name MateuszMalisz
 git config --local user.email mamalisz@microsoft.com
 git config --local credential.helper "store --file $2"
 
-git checkout -b tempBranchToPush
+branchName=tempBranchToPush
+git checkout -b $branchName
 git add count
 git commit -m "Updating count to $runCount"
-git push origin first
+git push origin $branchName:first
 
 gh config set prompt disabled
 gh auth login --with-token < $1
